@@ -64,3 +64,4 @@ function initMenuSystem(menu) {
 
 // Call the init function to start the menu system
 initMenuSystem(menu);
+
