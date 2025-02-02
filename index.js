@@ -6,7 +6,7 @@ const menu = {
 };
 
 // Function to display menu items by category
-function displayMenuItems(menu) {
+/*function displayMenuItems(menu) {
     // Get the menu container element from the HTML
     const menuSection = document.getElementById('menu');
 
@@ -43,8 +43,7 @@ function displayMenuItems(menu) {
             // Attach a click event listener to the list item to add it to the order
             itemsList.addEventListener('click', () => {
 
-                  // Append the list item to the list of items
-                  menuSection.appendChild(itemsList);
+                  function addToOrder(itemsName);
             });
         });
     }
@@ -87,4 +86,68 @@ function initMenuSystem(menu) {
 }
 
 // Start the menu system by calling the init function
-initMenuSystem(menu);
+initMenuSystem(menu); */
+
+const prices = {
+    Starters: [ 18.99, 60.00],
+    MainCourses: [95.99, 102.35],
+    Desserts: [54.32, 30.50]
+
+}
+
+const menuSection = document.getElementById('menu');
+const orderSection = document.getElementById('order');
+const orderList = document.getElementById('order-items');
+const orderTotalEl = document.getElementById('order-total')
+
+//initialise order total to zero
+
+let orderTotal = 0;
+let orderItems = [];
+
+function displayMenuItems(menu) {
+    for (const [category, items] of Object.entries(menu)) {
+       // creating a header for each category
+       const categoryHeader = document.createElement('h3');
+       categoryHeader.textContent = category;
+       menuSection.appendChild(categoryHeader)
+
+       //creating a list for each category
+       const categoryListEl = document.createElement('ul');
+       menuSection.appendChild(categoryListEl);
+
+       //creating a list element for each category
+       const listItem = document.createElement('li');
+       listItem.textContent = `${items} - R${prices[category]}`
+       categoryListEl.appendChild(listItem);
+
+       // adding an event listener to the list item
+       listItem.addEventListener("click", () => {
+
+        // updating the order total
+
+        orderTotal += prices[category];
+        orderTotalEl.textContent = orderTotal;
+
+       //adding the menu items to the order list
+       const orderItems = document.createElement('li');
+       orderItems.textContent = items;
+       orderList.appendChild(orderItems);
+
+       //adding the menu item to the order items array
+
+       //orderItems.push(items);
+
+
+       });
+
+
+
+
+    }
+
+
+
+}
+
+displayMenuItems(menu);
